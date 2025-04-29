@@ -53,7 +53,7 @@ Setup Steps
 Clone the repository:
 
 bash
-git clone https://github.com/yourusername/student-projects-platform.git
+git clone https://github.com/srijana28/student-projects-platform.git
 cd student-projects-platform
 Install PHP dependencies:
 
