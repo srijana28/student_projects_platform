@@ -11,15 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class ProjectController extends Controller
 {
     public function __construct()
-{
-    // Apply auth middleware to specific methods
-    $this->middleware('auth')->except(['index', 'show']);
-
-    // Explicitly authorize resource actions
-    $this->middleware('can:create,App\Models\Project')->only(['create', 'store']);
-    $this->middleware('can:update,App\Models\Project')->only(['edit', 'update']);
-    $this->middleware('can:delete,App\Models\Project')->only(['destroy']);
-}
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('can:create,App\Models\Project')->only(['create', 'store']);
+        $this->middleware('can:update,project')->only(['edit', 'update']);
+        $this->middleware('can:delete,project')->only(['destroy']);
+    }
 
 
     public function index()
@@ -53,17 +50,19 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $project->load(['university', 'user', 'comments.user', 'likes']);
-        return view('projects.show', compact('project'));
+        return view('dashboard', compact('project'));
     }
 
     public function edit(Project $project)
     {
+        $this->authorize('update', $project);
         $universities = University::all();
         return view('projects.edit', compact('project', 'universities'));
     }
 
     public function update(Request $request, Project $project)
     {
+        $this->authorize('update', $project); 
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',

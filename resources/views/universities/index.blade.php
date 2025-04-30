@@ -11,7 +11,7 @@
             </div>
 
             <!-- University Modal -->
-            <div id="university-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div id="university-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
                 <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-medium">Add New University</h3>
@@ -23,15 +23,15 @@
                         @csrf
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700">University Name</label>
-                            <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                            <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md bg-gray-100 border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                         </div>
                         <div class="mb-4">
                             <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-                            <input type="text" name="location" id="location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            <input type="text" name="location" id="location" class="mt-1 block w-full rounded-md bg-gray-100 border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         </div>
                         <div class="mb-4">
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                            <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md bg-gray-100 border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
                         </div>
                         <div class="flex justify-end">
                             <button type="button" onclick="document.getElementById('university-modal').classList.add('hidden')" class="mr-2 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -45,16 +45,17 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- University Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                 @foreach($universities as $university)
-                    <div class="border rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <div class="rounded-lg overflow-hidden shadow-lg bg-blue-50 hover:bg-blue-100 transition duration-300 ease-in-out transform hover:scale-105"> <!-- Very Light Blue with subtle hover effect -->
                         <div class="p-6">
-                            <h3 class="text-lg font-medium text-indigo-600 mb-2">{{ $university->name }}</h3>
-                            <p class="text-sm text-gray-500 mb-3">{{ $university->location }}</p>
-                            <p class="text-sm text-gray-600 mb-4 line-clamp-3">{{ $university->description }}</p>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ $university->name }}</h3>
+                            <p class="text-sm text-gray-700 mb-2">{{ $university->location }}</p>
+                            <p class="text-sm text-gray-800 mb-4 line-clamp-3">{{ $university->description }}</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-500">{{ $university->projects_count }} projects</span>
-                                <a href="{{ route('universities.show', $university) }}" class="text-indigo-500 text-sm hover:underline">View Projects</a>
+                                <span class="text-sm text-gray-700">{{ $university->projects_count }} projects</span>
+                                <a href="{{ route('universities.show', $university) }}" class="text-indigo-700 text-sm font-medium hover:underline">View Projects</a>
                             </div>
                         </div>
                     </div>
